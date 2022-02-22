@@ -11,7 +11,7 @@ export class AppComponent{
   title = 'dashfront';
 }
 
-let tabAnime animes[];
+tabAnime animes[];
 
 function cleanString($string){
 	$string = strtolower($string);
@@ -23,7 +23,7 @@ function cleanString($string){
 
 function topAnime(){
   /* Requête à faire pour afficher les animes en vedette en ce moment */
-	animes = request.open('GET','https://api.jikan.moe/v3/top/anime/1');
+	animes = request.open('GET','https://api.jikan.moe/v3/top/anime/1/bypopularity');
 }
 
 function animeParSortie(){
@@ -45,7 +45,7 @@ function rechercherAnime(){
 
 	  /* Requête à faire pour rechercher un anime précis */
 	  var txtSearch = $motRecherche.replace(" ", "%20");
-    var urlS = "https://api.jikan.moe/v3/search/anime?q=" + txtSearch;
+    var urlS = "https://api.jikan.moe/v3/search/anime?q=" + txtSearch + "&order_by=title&sort=asc&limit=10";
 	  animes = request.open('GET', urlS);
   }else {
     echo "Aucune recherche effectuée...";

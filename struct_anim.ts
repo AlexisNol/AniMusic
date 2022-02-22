@@ -26,7 +26,7 @@ export class tabAnime{
       title: string,
       title_english: string,
       title_japanese: string,
-      title_synonyms:[string],
+      title_synonyms:Array<string>,
 
       type: string,
       source: string,
