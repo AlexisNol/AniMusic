@@ -16,43 +16,43 @@ export class ListeAnimeComponent implements OnInit {
 
 //tabAnime animes[];
 
-cleanString($chaine){
-	$chaine = strtolower($chaine);
-	$chaine = preg_replace("/[^a-z0-9_'\s-]/", "", $chaine);
-	$chaine = preg_replace("/[\s-]+/", " ", $chaine);
-	$chaine = preg_replace("/[\s_]/", " ", $chaine);
-	return $chaine;
+cleanString(chaine){
+	chaine = strtolower(chaine);
+	chaine = preg_replace("/[^a-z0-9_'\s-]/", "", chaine);
+	chaine = preg_replace("/[\s-]+/", " ", chaine);
+	chaine = preg_replace("/[\s_]/", " ", chaine);
+	return chaine;
 }
 
-topAnime($animes){
+topAnime(animes){
   /* Requête à faire pour afficher les animes en vedette en ce moment */
-	$animes = request.open('GET','https://api.jikan.moe/v3/top/anime/1/bypopularity');
-  console.log($animes);
+	animes = request.open('GET','https://api.jikan.moe/v3/top/anime/1/bypopularity');
+  console.log(animes);
 }
 
-animeParSortie($animes){
+animeParSortie(animes){
   /* Requête à faire pour afficher les animes sorties lors d'une saison et année précise */
 	if(isset($_POST['annee']) && !empty($_POST['annee']) && (isset($_POST['saison']) && !empty($_POST['saison'])) {
-		$anneeRecherche = $_POST['annee'];
-		$saisonRecherche =cleanString($_POST['saison']);
-		var urlSortieSaison = 'https://api.jikan.moe/v3/season/'+ $anneeRecherche +'/'+ $saisonRecherche;
-		$animes = request.open('GET', urlSortieSaison);
-    console.log($animes);
+		let anneeRecherche = $_POST['annee'];
+		let saisonRecherche =cleanString($_POST['saison']);
+		var urlSortieSaison = 'https://api.jikan.moe/v3/season/'+ anneeRecherche +'/'+ saisonRecherche;
+		animes = request.open('GET', urlSortieSaison);
+    console.log(animes);
 	}else{
 		echo "Impossible d'effectuer cette recherche, les paramètres sont incorrectes...";
 	}
 
 }
 
-rechercherAnime($animes){
+rechercherAnime(animes){
   if(isset($_POST['mot']) && !empty($_POST['mot'])) {
-	  $motRecherche = cleanString($_POST['mot']);
+	  let motRecherche = cleanString($_POST['mot']);
 
 	  /* Requête à faire pour rechercher un anime précis */
-	  var txtSearch = $motRecherche.replace(" ", "%20");
+	  var txtSearch = motRecherche.replace(" ", "%20");
     var urlS = "https://api.jikan.moe/v3/search/anime?q=" + txtSearch + "&order_by=title&sort=asc&limit=10";
-	  $animes = request.open('GET', urlS);
-    console.log($animes);
+	  animes = request.open('GET', urlS);
+    console.log(animes);
   }else {
     echo "Aucune recherche effectuée...";
   }
