@@ -35,7 +35,13 @@ animeByDate(animes){
   /* Requête à faire pour afficher les animes sorties lors d'une saison et année précise */
 	if(isset($_POST['annee']) && !empty($_POST['annee']) && (isset($_POST['saison']) && !empty($_POST['saison'])) {
 		let anneeRecherche = $_POST['annee'];
-		let saisonRecherche =cleanString($_POST['saison']);
+		let saisonRecherche = cleanString($_POST['saison']);
+    switch (saisonRecherche){
+      case "hiver":saisonRecherche = "winter";break;
+      case "printemps":saisonRecherche = "spring";break;
+      case "ete":saisonRecherche = "summer";break;
+      case "automne":saisonRecherche = "fall";break;
+    }
 		var urlSortieSaison = 'https://api.jikan.moe/v3/season/'+ anneeRecherche +'/'+ saisonRecherche;
 		animes = request.open('GET', urlSortieSaison);
     console.log(animes);
