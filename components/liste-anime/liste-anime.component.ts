@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './liste-anime.component.html',
   styleUrls: ['./liste-anime.component.css']
 })
+
 export class ListeAnimeComponent implements OnInit {
 
   constructor() { }
@@ -30,7 +31,7 @@ topAnime(animes){
   console.log(animes);
 }
 
-animeParSortie(animes){
+animeByDate(animes){
   /* Requête à faire pour afficher les animes sorties lors d'une saison et année précise */
 	if(isset($_POST['annee']) && !empty($_POST['annee']) && (isset($_POST['saison']) && !empty($_POST['saison'])) {
 		let anneeRecherche = $_POST['annee'];
@@ -44,7 +45,7 @@ animeParSortie(animes){
 
 }
 
-rechercherAnime(animes){
+searchAnime(animes){
   if(isset($_POST['mot']) && !empty($_POST['mot'])) {
 	  let motRecherche = cleanString($_POST['mot']);
 
