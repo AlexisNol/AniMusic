@@ -17,25 +17,25 @@ export class ListeAnimeComponent implements OnInit {
 
 //tabAnime animes[];
 
-function cleanString(chaine: string){
-	chaine = strtolower(chaine);
-	chaine = preg_replace("/[^a-z0-9_'\s-]/", "", chaine);
-	chaine = preg_replace("/[\s-]+/", " ", chaine);
-	chaine = preg_replace("/[\s_]/", " ", chaine);
+function cleanString(uneChaine: string){
+	chaine = uneChaine.toLowerCase();
+	chaine.replace("/[^a-z0-9_'\s-]/", "");
+	chaine.replace("/[\s-]+/", " ");
+	chaine.replace("/[\s_]/", " ");
 	return chaine;
 }
 
-function topAnime(animes: array){
+function topAnime(animes: tabAnime[]){
   /* Requête à faire pour afficher les animes en vedette en ce moment */
 	animes = request.open('GET','https://api.jikan.moe/v3/top/anime/1/bypopularity');
   console.log(animes);
 }
 
-function animeByDate(animes: array){
+function animeByDate(animes: tabAnime[]){
   /* Requête à faire pour afficher les animes sorties lors d'une saison et année précise */
 	if(isset($_POST['annee']) && !empty($_POST['annee']) && (isset($_POST['saison']) && !empty($_POST['saison'])) {
 		let anneeRecherche = $_POST['annee'];
-		let saisonRecherche = cleanString($_POST['saison']);
+		let saisonRecherche = this.cleanString($_POST['saison']);
     switch (saisonRecherche){
       case "hiver":saisonRecherche = "winter";break;
       case "printemps":saisonRecherche = "spring";break;
@@ -51,9 +51,9 @@ function animeByDate(animes: array){
 
 }
 
-function searchAnime(animes: array){
+function searchAnime(animes: tabAnime[]){
   if(isset($_POST['mot']) && !empty($_POST['mot'])) {
-	  let motRecherche = cleanString($_POST['mot']);
+	  let motRecherche = this.cleanString($_POST['mot']);
 
 	  /* Requête à faire pour rechercher un anime précis */
 	  var txtSearch = motRecherche.replace(" ", "%20");
