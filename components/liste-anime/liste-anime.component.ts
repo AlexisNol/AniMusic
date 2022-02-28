@@ -17,7 +17,7 @@ export class ListeAnimeComponent implements OnInit {
 
 //tabAnime animes[];
 
-cleanString(chaine){
+function cleanString(chaine: string){
 	chaine = strtolower(chaine);
 	chaine = preg_replace("/[^a-z0-9_'\s-]/", "", chaine);
 	chaine = preg_replace("/[\s-]+/", " ", chaine);
@@ -25,13 +25,13 @@ cleanString(chaine){
 	return chaine;
 }
 
-topAnime(animes){
+function topAnime(animes: array){
   /* Requête à faire pour afficher les animes en vedette en ce moment */
 	animes = request.open('GET','https://api.jikan.moe/v3/top/anime/1/bypopularity');
   console.log(animes);
 }
 
-animeByDate(animes){
+function animeByDate(animes: array){
   /* Requête à faire pour afficher les animes sorties lors d'une saison et année précise */
 	if(isset($_POST['annee']) && !empty($_POST['annee']) && (isset($_POST['saison']) && !empty($_POST['saison'])) {
 		let anneeRecherche = $_POST['annee'];
@@ -51,7 +51,7 @@ animeByDate(animes){
 
 }
 
-searchAnime(animes){
+function searchAnime(animes: array){
   if(isset($_POST['mot']) && !empty($_POST['mot'])) {
 	  let motRecherche = cleanString($_POST['mot']);
 
