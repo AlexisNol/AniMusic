@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { tabAnime } from '../../../tab_anime.js'
+import { tabAnime } from './struct_anim';
 @Component({
   selector: 'app-liste-anime',
   templateUrl: './liste-anime.component.html',
@@ -34,7 +34,7 @@ export class ListeAnimeComponent implements OnInit {
 
   public topAnime(){
     /* Requête à faire pour afficher les animes en vedette en ce moment */
-  	this.animes = fetch('https://api.jikan.moe/v3/top/anime/1/bypopularity');
+  	this.animes.push(fetch('https://api.jikan.moe/v3/top/anime/1/bypopularity'));
     console.log(this.animes);
   }
 
@@ -49,7 +49,7 @@ export class ListeAnimeComponent implements OnInit {
         case "automne":saisonRecherche = "fall";break;
       }
   		var urlSortieSaison = 'https://api.jikan.moe/v3/season/'+ this.annee +'/'+ saisonRecherche;
-  		this.animes = fetch(urlSortieSaison);
+  		this.animes.push(fetch(urlSortieSaison));
       console.log(this.animes);
   	}else{
   		console.log("Impossible d'effectuer cette recherche, les paramètres sont incorrectes...");
@@ -63,7 +63,7 @@ export class ListeAnimeComponent implements OnInit {
   	  /* Requête à faire pour rechercher un anime précis */
   	  var txtSearch = motRecherche.replace(" ", "%20");
       var urlS = "https://api.jikan.moe/v3/search/anime?q=" + txtSearch + "&order_by=title&sort=asc&limit=10";
-  	  this.animes = fetch(urlS);
+  	  this.animes.push(fetch(urlS));
       console.log(this.animes);
     }else{
       console.log("Aucune recherche effectuée...");
