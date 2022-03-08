@@ -48,6 +48,10 @@ export class ListeAnimeComponent implements OnInit {
         case "printemps":saisonRecherche = "spring";break;
         case "ete":saisonRecherche = "summer";break;
         case "automne":saisonRecherche = "fall";break;
+        default:
+          if(saisonRecherche != "winter" && saisonRecherche != "spring" && saisonRecherche != "summer" && saisonRecherche != "fall"){
+            console.log("Veuillez saisir une des saisons suivantes : hiver, printemps, ete, automne \n");break;
+          }
       }
   		var urlSortieSaison = "https://api.jikan.moe/v3/season/"+ this.annee +"/"+ saisonRecherche;
       this.animes = [];
