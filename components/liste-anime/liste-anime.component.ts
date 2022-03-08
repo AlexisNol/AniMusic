@@ -34,7 +34,8 @@ export class ListeAnimeComponent implements OnInit {
 
   public topAnime(){
     /* Requête à faire pour afficher les animes en vedette en ce moment */
-  	this.animes.push(fetch('https://api.jikan.moe/v3/top/anime/1/bypopularity'));
+    this.animes = [];
+  	this.animes.push(fetch("https://api.jikan.moe/v3/top/anime/1/bypopularity"));
     console.log(this.animes);
   }
 
@@ -48,7 +49,8 @@ export class ListeAnimeComponent implements OnInit {
         case "ete":saisonRecherche = "summer";break;
         case "automne":saisonRecherche = "fall";break;
       }
-  		var urlSortieSaison = 'https://api.jikan.moe/v3/season/'+ this.annee +'/'+ saisonRecherche;
+  		var urlSortieSaison = "https://api.jikan.moe/v3/season/"+ this.annee +"/"+ saisonRecherche;
+      this.animes = [];
   		this.animes.push(fetch(urlSortieSaison));
       console.log(this.animes);
   	}else{
@@ -63,10 +65,18 @@ export class ListeAnimeComponent implements OnInit {
   	  /* Requête à faire pour rechercher un anime précis */
   	  var txtSearch = motRecherche.replace(" ", "%20");
       var urlS = "https://api.jikan.moe/v3/search/anime?q=" + txtSearch + "&order_by=title&sort=asc&limit=10";
-  	  this.animes.push(fetch(urlS));
+      this.animes = [];
+      this.animes.push(fetch(urlS));
       console.log(this.animes);
     }else{
       console.log("Aucune recherche effectuée...");
     }
+  }
+
+  public newAnimes(){
+    /* Requête qui affiche en recommandation les animes récents */
+    this.animes = [];
+    this.animes.push(fetch("https://api.jikan.moe/v4/recommendations/anime"));
+    console.log(this.animes);
   }
 }
