@@ -7,13 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StructAnimeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-  data: [
+  var data: [
   {
       mal_id: number,
       url: string,
@@ -153,5 +147,11 @@ export class StructAnimeComponent implements OnInit {
       has_next_page: boolean
   }
 
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
 
 }
